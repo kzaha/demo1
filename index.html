@@ -9,111 +9,128 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1F3A34; --paper:#F4EFE3; --chalk:#F5F0E6; --board:#213C36; --board-2:#2B4A42;
-  --marker:#E8B93F; --coral:#D1495B; --ok:#5C9E7C; --line:rgba(245,240,230,0.14);
-  --bg:var(--board); --fg:var(--chalk); --card:var(--board-2); --muted:#B9C7C2;
-  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-  box-sizing:border-box;
+  --ink:#1F3A34; --paper:#F4EFE3; --board:#16302B; --board-2:#1E3F38; --board-3:#254A42;
+  --mint:#3ECF8E; --marker:#E8B93F; --coral:#E5677A; --line:rgba(255,255,255,0.10);
+  --bg:var(--board); --fg:#F2FBF7; --card:var(--board-2); --muted:#8FB5AB;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); box-sizing:border-box;
 }
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){ --bg:var(--paper); --fg:var(--ink); --card:#fff; --muted:#5B6F68; --line:rgba(31,58,52,0.14); }
-}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --bg:var(--paper); --fg:var(--ink); --card:#fff; --muted:#5B6F68; --line:rgba(31,58,52,0.14);} }
 :root[data-theme="light"]{ --bg:var(--paper); --fg:var(--ink); --card:#fff; --muted:#5B6F68; --line:rgba(31,58,52,0.14); }
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%}
-body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:'Montserrat',sans-serif;font-weight:500;transition:background .3s}
-.wrap{max-width:640px;margin:0 auto;padding:28px 20px 60px}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:'Montserrat',sans-serif;font-weight:500}
+.wrap{max-width:520px;margin:0 auto;padding:24px 18px 100px}
 h1,h2{font-family:'Montserrat',sans-serif;font-weight:800;margin:0 0 6px;line-height:1.15;letter-spacing:-.01em}
-h1{font-size:26px}
-p{color:var(--muted);line-height:1.5;margin:0 0 18px;max-width:60ch;font-weight:500}
-strong{font-weight:800}
-header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:10px}
+h1{font-size:24px} h2{font-size:19px}
+p{color:var(--muted);line-height:1.5;margin:0 0 16px;font-weight:500;font-size:14px}
+header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:10px}
 .pill{font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .pill.streak{color:var(--marker);border-color:var(--marker)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:16px}
-.btn{font-family:inherit;font-weight:700;font-size:15px;padding:13px 20px;border-radius:12px;border:none;cursor:pointer;background:var(--marker);color:#2A2205;transition:transform .15s}
-.btn:active{transform:scale(.97)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:14px}
+.hero{background:linear-gradient(135deg,var(--board-3),var(--board-2));border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
+.hero .badge{width:36px;height:36px;border-radius:10px;background:rgba(62,207,142,.18);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:8px}
+.btn{font-family:inherit;font-weight:700;font-size:15px;padding:13px 20px;border-radius:14px;border:none;cursor:pointer;background:var(--marker);color:#2A2205;width:100%}
+.btn.mint{background:var(--mint);color:#0C2620}
+.btn:active{transform:scale(.98)}
 .btn.secondary{background:transparent;border:1.5px solid var(--line);color:var(--fg)}
-.btn.ghost{background:transparent;color:var(--muted);text-decoration:underline;padding:6px;font-weight:600}
-.btn:disabled{opacity:.5;cursor:default}
+.btn.ghost{background:transparent;color:var(--muted);text-decoration:underline;padding:6px;font-weight:600;width:auto}
+.btn:disabled{opacity:.5}
 input[type=email],textarea{width:100%;font-family:inherit;font-weight:500;font-size:15px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
 textarea{resize:vertical;min-height:70px}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.dropzone{border:2px dashed var(--line);border-radius:16px;padding:36px 20px;text-align:center;cursor:pointer;font-weight:600}
-.dropzone:hover{border-color:var(--marker)}
-.dropzone img{max-width:100%;max-height:180px;border-radius:10px;margin-bottom:10px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.dropzone{border:2px dashed var(--line);border-radius:16px;padding:32px 18px;text-align:center;cursor:pointer;font-weight:600}
+.dropzone img{max-width:100%;max-height:160px;border-radius:10px;margin-bottom:8px}
 .thinking{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;font-weight:600}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--marker);animation:pulse 1s infinite ease-in-out}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--marker);animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 .flash{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
-.flash textarea{margin-bottom:6px;font-size:14px}
 .flash-label{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--muted);margin-bottom:4px;display:block}
-.small{font-size:13px}
 .err{color:var(--coral);font-size:14px;font-weight:600;margin-top:8px}
 .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.match-item{padding:14px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;text-align:center;transition:.15s}
+.match-item{padding:14px 8px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;font-size:13px;font-weight:600;text-align:center}
 .match-item.sel{border-color:var(--marker)}
-.match-item.ok{border-color:var(--ok);color:var(--ok);opacity:.4;pointer-events:none}
+.match-item.ok{border-color:var(--mint);color:var(--mint);opacity:.4;pointer-events:none}
 .match-item.bad{animation:shake .3s}
 @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.qopt{display:block;width:100%;text-align:left;padding:12px 14px;margin-bottom:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
-.qopt.ok{border-color:var(--ok);background:rgba(92,158,124,.15)}
-.qopt.bad{border-color:var(--coral);background:rgba(209,73,91,.12)}
-.score{font-family:'Montserrat',sans-serif;font-weight:800;font-size:44px;margin:6px 0}
+.qopt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:12px 14px;margin-bottom:8px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.qopt .lt{width:24px;height:24px;flex:none;border-radius:7px;background:var(--board-3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.qopt.ok{border-color:var(--mint);background:rgba(62,207,142,.14)} .qopt.ok .lt{background:var(--mint);color:#0C2620}
+.qopt.bad{border-color:var(--coral);background:rgba(229,103,122,.12)}
+.score{font-weight:800;font-size:42px;margin:4px 0}
 .hide{display:none}
-.topic{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:1px solid var(--line);margin-bottom:10px;cursor:pointer}
-.topic:hover{border-color:var(--marker)}
+.topic{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;border:1px solid var(--line);margin-bottom:8px;cursor:pointer}
+.topic:hover{border-color:var(--mint)}
+.topic .ico{width:38px;height:38px;border-radius:10px;background:var(--board-3);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
 .topic .tinfo{flex:1;min-width:0}
-.topic .tname{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.topic .tmeta{font-size:12px;color:var(--muted);font-weight:600}
-.bar{height:5px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}
-.bar > div{height:100%;background:var(--marker)}
-.empty{color:var(--muted);font-size:14px;font-weight:600;padding:10px 0}
+.topic .tname{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topic .tmeta{font-size:11px;color:var(--muted);font-weight:600}
+.bar{height:5px;border-radius:3px;background:var(--line);margin-top:5px;overflow:hidden}
+.bar>div{height:100%;background:var(--mint)}
+.empty{color:var(--muted);font-size:14px;font-weight:600;padding:8px 0}
+.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.statbox{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.statbox b{display:block;font-size:24px;font-weight:800}
+.statbox span{font-size:11px;color:var(--muted);font-weight:600}
+.xpbar{height:10px;border-radius:6px;background:var(--bg);overflow:hidden;margin:8px 0}
+.xpbar>div{height:100%;background:var(--marker)}
+nav.bottomnav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;background:var(--card);border-top:1px solid var(--line);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto}
+nav.bottomnav button{background:none;border:none;color:var(--muted);font-family:inherit;font-weight:700;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+nav.bottomnav button.active{color:var(--mint)}
+nav.bottomnav .ic{font-size:18px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="top">
-    <h1 style="font-size:20px">Конспект → игра</h1>
-    <span class="pill" id="statusPill">гость</span>
-  </header>
+  <header class="top"><h1 style="font-size:19px">🧠 Конспект → игра</h1><span class="pill" id="statusPill">гость</span></header>
 
   <div id="gate" class="card">
     <h2>Вход</h2>
     <p>Введи почту. Если она в домене школы — доступ бесплатный. Если нет — можно оформить демо-подписку.</p>
     <input type="email" id="emailInput" placeholder="имя@uchenik.n.school">
-    <div class="row"><button class="btn" id="checkEmailBtn">Продолжить</button></div>
-    <div id="gateMsg" class="small" style="margin-top:10px"></div>
+    <div class="row"><button class="btn mint" id="checkEmailBtn">Продолжить</button></div>
+    <div id="gateMsg" class="pill" style="margin-top:10px;display:inline-block"></div>
   </div>
 
   <div id="paywall" class="card hide">
     <h2>Подписка</h2>
-    <p>Эта почта не из школьного домена. Оформи подписку, чтобы пользоваться игрой (это демо-имитация оплаты для защиты проекта).</p>
-    <div class="row">
-      <button class="btn" id="payBtn">Оплатить · 199 ₽/мес (демо)</button>
-      <button class="btn secondary" id="backToGate">Назад</button>
-    </div>
+    <p>Эта почта не из школьного домена. Оформи подписку (демо-имитация оплаты для защиты проекта).</p>
+    <div class="row"><button class="btn" id="payBtn">Оплатить · 199 ₽/мес (демо)</button><button class="btn secondary" id="backToGate">Назад</button></div>
   </div>
 
-  <div id="menu" class="card hide">
-    <h2>Твои темы</h2>
-    <p>Каждый загруженный конспект сохраняется как отдельная тема — можно повторять её снова в любой момент.</p>
+  <div id="menu" class="tab hide">
+    <div class="hero"><div class="badge">🧠</div><h2>Твой конспект может стать игрой!</h2><p style="margin:0">Загружай темы — превратим их в карточки и мини-игры на повторение.</p></div>
+    <div class="row" style="margin-top:0"><button class="btn mint" id="newTopicBtn">+ Новый конспект</button></div>
+    <h2 style="margin-top:20px">Мои темы</h2>
     <div id="topicsList"></div>
-    <div class="row">
-      <button class="btn" id="newTopicBtn">+ Новый конспект</button>
-      <button class="btn secondary hide" id="marathonBtn">Марафон по всем темам</button>
+    <div class="row"><button class="btn secondary hide" id="marathonBtn">Марафон по всем темам</button></div>
+  </div>
+
+  <div id="stats" class="tab hide">
+    <h2>📊 Статистика</h2>
+    <div class="statgrid">
+      <div class="statbox"><b id="statPct">0%</b><span>успеваемость</span></div>
+      <div class="statbox"><b id="statStreak">0</b><span>дней подряд</span></div>
     </div>
+    <h2>Топ тем</h2>
+    <div id="topStats"></div>
+  </div>
+
+  <div id="profile" class="tab hide">
+    <h2>👤 Профиль</h2>
+    <div class="card" style="background:var(--bg)">
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px"><span>Уровень <span id="profLevel">1</span></span><span id="profXp">0/10 XP</span></div>
+      <div class="xpbar"><div id="profBar" style="width:0%"></div></div>
+    </div>
+    <p style="margin-top:14px">Тем создано: <strong id="profTopics">0</strong> · Карточек выучено: <strong id="profLearned">0</strong></p>
+    <p class="empty">Синхронизация между устройствами, напоминания и обмен темами с друзьями — в планах развития проекта.</p>
   </div>
 
   <div id="home" class="card hide">
     <h2>Загрузи конспект</h2>
-    <p>Сфотографируй страницу рукописного конспекта — по любому предмету. Мы превратим её в карточки для повторения.</p>
+    <p>Сфотографируй страницу рукописного конспекта — по любому предмету.</p>
     <div class="dropzone" id="dropzone"><div id="dropzoneInner">📸 Нажми, чтобы выбрать фото</div></div>
     <input type="file" id="fileInput" accept="image/*" capture="environment" style="display:none">
-    <div class="row">
-      <button class="btn" id="parseBtn" disabled>Разобрать конспект</button>
-      <button class="btn ghost" id="pasteInstead">…или вставить текст конспекта вручную</button>
-    </div>
+    <div class="row"><button class="btn mint" id="parseBtn" disabled>Разобрать конспект</button><button class="btn ghost" id="pasteInstead">…или вставить текст вручную</button></div>
     <textarea id="pasteArea" class="hide" placeholder="Вставь сюда текст конспекта" style="margin-top:12px"></textarea>
     <div id="homeThinking" class="thinking hide" style="margin-top:14px"><span class="dot"></span> Читаю почерк и собираю карточки…</div>
     <div id="homeErr" class="err hide"></div>
@@ -124,34 +141,34 @@ textarea{resize:vertical;min-height:70px}
     <h2 id="cardsTitle">Проверь карточки</h2>
     <p>Модель может ошибиться в почерке — поправь текст перед игрой.</p>
     <div id="cardsList"></div>
-    <div class="row">
-      <button class="btn" id="playQuizBtn">Играть · Тест</button>
-      <button class="btn secondary" id="playMatchBtn">Играть · Пары</button>
-      <button class="btn ghost" id="cardsBack">← К темам</button>
-    </div>
+    <div class="row"><button class="btn mint" id="playQuizBtn">Играть · Тест</button><button class="btn secondary" id="playMatchBtn">Играть · Пары</button><button class="btn ghost" id="cardsBack">← К темам</button></div>
   </div>
 
-  <div id="quizScreen" class="card hide">
-    <h2 id="quizTitle">Тест</h2>
-    <div id="quizBody"></div>
-  </div>
-
-  <div id="matchScreen" class="card hide">
-    <h2>Собери пары</h2>
-    <p class="small">Нажми вопрос, потом подходящий ответ.</p>
-    <div class="match-grid" id="matchGrid"></div>
-  </div>
+  <div id="quizScreen" class="card hide"><h2 id="quizTitle">Тест</h2><div id="quizBody"></div></div>
+  <div id="matchScreen" class="card hide"><h2>Собери пары</h2><p>Нажми вопрос, потом подходящий ответ.</p><div class="match-grid" id="matchGrid"></div></div>
 </div>
+
+<nav class="bottomnav hide" id="bottomnav">
+  <button data-tab="menu"><span class="ic">🏠</span>Главная</button>
+  <button data-tab="stats"><span class="ic">📊</span>Статистика</button>
+  <button data-tab="profile"><span class="ic">👤</span>Профиль</button>
+</nav>
 
 <script>
 const $ = id => document.getElementById(id);
-let cards = [];
-let currentTopicId = null;
-let imgFile = null;
+let cards = [], currentTopicId = null, imgFile = null;
+const ALL = ['gate','paywall','menu','stats','profile','home','cardsScreen','quizScreen','matchScreen'];
+const TABS = ['menu','stats','profile'];
+function show(id){
+  ALL.forEach(s=>$(s).classList.toggle('hide', s!==id));
+  $('bottomnav').classList.toggle('hide', !TABS.includes(id));
+  $('bottomnav').querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.dataset.tab===id));
+  if(id==='stats') renderStats();
+  if(id==='profile') renderProfile();
+  if(id==='menu') renderMenu();
+}
+$('bottomnav').querySelectorAll('button').forEach(b=> b.onclick = () => show(b.dataset.tab));
 
-function show(id){ ['gate','paywall','menu','home','cardsScreen','quizScreen','matchScreen'].forEach(s=>$(s).classList.toggle('hide', s!==id)); }
-
-// ---- storage ----
 function getTopics(){ try{ return JSON.parse(localStorage.getItem('topics')||'[]'); }catch(e){ return []; } }
 function saveTopics(t){ try{ localStorage.setItem('topics', JSON.stringify(t)); }catch(e){} }
 function bumpStreak(){
@@ -165,209 +182,178 @@ function bumpStreak(){
     return count;
   }catch(e){ return 1; }
 }
-
-// ---- auth gate ----
-function isSchoolEmail(email){
-  const d = (email.split('@')[1]||'').toLowerCase().trim();
-  return d.endsWith('n.school');
+function getStreak(){ try{ return JSON.parse(localStorage.getItem('streak')||'{}').count||0; }catch(e){ return 0; } }
+function subjectIcon(s){
+  s=(s||'').toLowerCase();
+  if(s.includes('биолог')) return '🧬';
+  if(s.includes('англ')||s.includes('язык')) return '🔤';
+  if(s.includes('истор')) return '📜';
+  if(s.includes('матем')||s.includes('алгебр')) return '➗';
+  if(s.includes('хим')) return '🧪';
+  if(s.includes('физ')) return '⚛️';
+  if(s.includes('географ')) return '🌍';
+  return '📘';
 }
+
+function isSchoolEmail(email){ const d=(email.split('@')[1]||'').toLowerCase().trim(); return d.endsWith('n.school'); }
 $('checkEmailBtn').onclick = () => {
   const email = $('emailInput').value.trim();
-  if(!email.includes('@')){ $('gateMsg').textContent = 'Введи корректную почту.'; return; }
-  if(isSchoolEmail(email)){ $('statusPill').textContent = 'бесплатно · школа'; enterApp(); }
-  else { show('paywall'); }
+  if(!email.includes('@')){ $('gateMsg').textContent='Введи корректную почту.'; return; }
+  if(isSchoolEmail(email)){ $('statusPill').textContent='бесплатно · школа'; enterApp(); } else show('paywall');
 };
 $('backToGate').onclick = () => show('gate');
-$('payBtn').onclick = () => { $('statusPill').textContent = 'подписка (демо)'; enterApp(); };
-
+$('payBtn').onclick = () => { $('statusPill').textContent='подписка (демо)'; enterApp(); };
 function enterApp(){
   const streak = bumpStreak();
   const pill = document.createElement('span');
   pill.className='pill streak'; pill.textContent = `🔥 ${streak} ${streak===1?'день':'дня подряд'}`;
-  $('gate').closest('.wrap').querySelector('header.top').appendChild(pill);
-  renderMenu();
+  document.querySelector('header.top').appendChild(pill);
   show('menu');
 }
 
-// ---- menu ----
 function renderMenu(){
   const topics = getTopics();
-  if(!topics.length){ $('topicsList').innerHTML = '<div class="empty">Пока нет ни одной темы — загрузи первый конспект.</div>'; }
-  else {
-    $('topicsList').innerHTML = topics.map(t=>{
-      const pct = t.total ? Math.round((t.learned||0)/t.total*100) : 0;
-      return `<div class="topic" data-id="${t.id}">
-        <div class="tinfo">
-          <div class="tname">${t.subject||'Без названия'}</div>
-          <div class="tmeta">${t.cards.length} карточек${t.total?` · ${pct}% выучено`:''}</div>
-          <div class="bar"><div style="width:${pct}%"></div></div>
-        </div>
-      </div>`;
-    }).join('');
-    $('topicsList').querySelectorAll('.topic').forEach(el=>{
-      el.onclick = () => openTopic(el.dataset.id);
-    });
-  }
+  $('topicsList').innerHTML = topics.length ? topics.map(t=>{
+    const pct = t.total ? Math.round((t.learned||0)/t.total*100) : 0;
+    return `<div class="topic" data-id="${t.id}">
+      <div class="ico">${subjectIcon(t.subject)}</div>
+      <div class="tinfo"><div class="tname">${t.subject||'Без названия'}</div>
+      <div class="tmeta">${t.cards.length} карточек${t.total?` · ${pct}% выучено`:''}</div>
+      <div class="bar"><div style="width:${pct}%"></div></div></div>
+    </div>`;
+  }).join('') : '<div class="empty">Пока нет ни одной темы — загрузи первый конспект.</div>';
+  $('topicsList').querySelectorAll('.topic').forEach(el=> el.onclick = () => openTopic(el.dataset.id));
   $('marathonBtn').classList.toggle('hide', topics.length < 2);
+}
+function renderStats(){
+  const topics = getTopics();
+  const totalCards = topics.reduce((s,t)=>s+t.cards.length,0);
+  const totalLearned = topics.reduce((s,t)=>s+(t.learned||0),0);
+  $('statPct').textContent = totalCards ? Math.round(totalLearned/totalCards*100)+'%' : '0%';
+  $('statStreak').textContent = getStreak();
+  const top = [...topics].sort((a,b)=>((b.learned||0)/(b.total||1))-((a.learned||0)/(a.total||1))).slice(0,5);
+  $('topStats').innerHTML = top.length ? top.map(t=>{
+    const pct = t.total ? Math.round((t.learned||0)/t.total*100):0;
+    return `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>${subjectIcon(t.subject)} ${t.subject}</span><span>${pct}%</span></div><div class="bar"><div style="width:${pct}%"></div></div></div>`;
+  }).join('') : '<div class="empty">Пройди хотя бы одну тему, чтобы увидеть статистику.</div>';
+}
+function renderProfile(){
+  const topics = getTopics();
+  const totalLearned = topics.reduce((s,t)=>s+(t.learned||0),0);
+  const level = Math.floor(totalLearned/10)+1;
+  const xpInLevel = totalLearned%10;
+  $('profLevel').textContent = level;
+  $('profXp').textContent = `${xpInLevel}/10 XP`;
+  $('profBar').style.width = (xpInLevel*10)+'%';
+  $('profTopics').textContent = topics.length;
+  $('profLearned').textContent = totalLearned;
 }
 $('newTopicBtn').onclick = () => { resetHome(); show('home'); };
 $('homeBack').onclick = () => show('menu');
 $('cardsBack').onclick = () => show('menu');
 $('marathonBtn').onclick = () => {
-  const topics = getTopics();
-  cards = topics.flatMap(t=>t.cards).slice(0,60);
-  currentTopicId = null;
-  $('cardsTitle').textContent = 'Марафон · все темы';
-  renderCards();
-  show('cardsScreen');
+  cards = getTopics().flatMap(t=>t.cards).slice(0,60); currentTopicId=null;
+  $('cardsTitle').textContent='Марафон · все темы'; renderCards(); show('cardsScreen');
 };
 function openTopic(id){
-  const t = getTopics().find(x=>x.id===id);
-  if(!t) return;
-  cards = t.cards; currentTopicId = id;
-  $('cardsTitle').textContent = t.subject || 'Тема';
-  renderCards();
-  show('cardsScreen');
+  const t = getTopics().find(x=>x.id===id); if(!t) return;
+  cards = t.cards; currentTopicId=id; $('cardsTitle').textContent = t.subject||'Тема';
+  renderCards(); show('cardsScreen');
 }
 function resetHome(){
   imgFile=null; $('dropzoneInner').textContent='📸 Нажми, чтобы выбрать фото';
-  $('parseBtn').disabled=true; $('pasteArea').value=''; $('pasteArea').classList.add('hide');
-  $('homeErr').classList.add('hide');
+  $('parseBtn').disabled=true; $('pasteArea').value=''; $('pasteArea').classList.add('hide'); $('homeErr').classList.add('hide');
 }
 
-// ---- backend call ----
-function fileToBase64(file){
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
+function fileToBase64(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file); }); }
 async function askServer(prompt, imageFile){
-  const body = { prompt };
-  if(imageFile){ body.imageBase64 = await fileToBase64(imageFile); body.imageType = imageFile.type || 'image/jpeg'; }
-  const res = await fetch('/api/parse', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
-  const data = await res.json();
-  if(!res.ok) throw new Error('server error');
-  return data.text;
+  const body={prompt}; if(imageFile){ body.imageBase64=await fileToBase64(imageFile); body.imageType=imageFile.type||'image/jpeg'; }
+  const res = await fetch('/api/parse',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const data = await res.json(); if(!res.ok) throw new Error('server error'); return data.text;
 }
 function extractJson(text){
-  const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-  const raw = fence ? fence[1] : text;
+  const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/); const raw = fence?fence[1]:text;
   const start = Math.min(...['[','{'].map(c=>{const i=raw.indexOf(c); return i===-1?Infinity:i;}));
-  const endChar = raw[start]==='[' ? ']' : '}';
-  const end = raw.lastIndexOf(endChar);
-  return JSON.parse(raw.slice(start, end+1));
+  const endChar = raw[start]==='['?']':'}'; const end = raw.lastIndexOf(endChar);
+  return JSON.parse(raw.slice(start,end+1));
 }
-
-// ---- upload ----
 $('dropzone').onclick = () => $('fileInput').click();
-$('fileInput').onchange = e => {
-  imgFile = e.target.files[0]; if(!imgFile) return;
-  $('dropzoneInner').innerHTML = `<img src="${URL.createObjectURL(imgFile)}">`;
-  $('parseBtn').disabled = false;
-};
-$('pasteInstead').onclick = () => {
-  $('pasteArea').classList.toggle('hide');
-  if(!$('pasteArea').classList.contains('hide')) $('parseBtn').disabled = false;
-};
+$('fileInput').onchange = e => { imgFile=e.target.files[0]; if(!imgFile) return; $('dropzoneInner').innerHTML=`<img src="${URL.createObjectURL(imgFile)}">`; $('parseBtn').disabled=false; };
+$('pasteInstead').onclick = () => { $('pasteArea').classList.toggle('hide'); if(!$('pasteArea').classList.contains('hide')) $('parseBtn').disabled=false; };
 
-const CARD_PROMPT = `Ты помогаешь школьнику превратить конспект в карточки для повторения. По тексту/фото конспекта (предмет любой) пройдись по ВСЕМУ конспекту от начала до конца и составь карточки вопрос-ответ по каждому факту, термину, определению, дате или формуле — сколько бы их ни было, не ограничивай себя маленьким числом. Каждая карточка короткая и конкретная. Если слово неразборчиво — пропусти только его. Ещё определи одним-двумя словами предмет/тему конспекта. Ответь ТОЛЬКО JSON-объектом вида {"subject":"...", "cards":[{"q":"...","a":"..."}]}, без пояснений и без markdown-разметки.`;
+const CARD_PROMPT = `Ты помогаешь школьнику превратить конспект в карточки для повторения. По тексту/фото конспекта (предмет любой) пройдись по ВСЕМУ конспекту от начала до конца и составь карточки вопрос-ответ по каждому факту, термину, определению, дате или формуле — сколько бы их ни было. Каждая карточка короткая и конкретная. Если слово неразборчиво — пропусти только его. Определи одним-двумя словами предмет конспекта. Ответь ТОЛЬКО JSON-объектом вида {"subject":"...", "cards":[{"q":"...","a":"..."}]}, без пояснений и markdown.`;
 
 $('parseBtn').onclick = async () => {
-  $('homeThinking').classList.remove('hide'); $('homeErr').classList.add('hide'); $('parseBtn').disabled = true;
+  $('homeThinking').classList.remove('hide'); $('homeErr').classList.add('hide'); $('parseBtn').disabled=true;
   try{
     let prompt = CARD_PROMPT;
     const useImage = imgFile && $('pasteArea').classList.contains('hide');
     if(!useImage) prompt += `\n\nТекст конспекта:\n${$('pasteArea').value}`;
-    const text = await askServer(prompt, useImage ? imgFile : null);
+    const text = await askServer(prompt, useImage?imgFile:null);
     const data = extractJson(text);
     const list = Array.isArray(data.cards) ? data.cards.filter(c=>c&&c.q&&c.a).slice(0,40) : [];
     if(!list.length) throw new Error('empty');
-    const topic = { id: 't'+Date.now(), subject: data.subject || 'Без названия', cards: list, total: list.length, learned: 0 };
+    const topic = {id:'t'+Date.now(), subject:data.subject||'Без названия', cards:list, total:list.length, learned:0};
     const topics = getTopics(); topics.unshift(topic); saveTopics(topics);
-    cards = list; currentTopicId = topic.id;
-    $('cardsTitle').textContent = topic.subject;
-    renderCards();
-    show('cardsScreen');
-  }catch(e){
-    $('homeErr').textContent = 'Не получилось разобрать конспект. Попробуй ещё раз или вставь текст.';
-    $('homeErr').classList.remove('hide');
-  } finally {
-    $('homeThinking').classList.add('hide'); $('parseBtn').disabled = false;
-  }
+    cards=list; currentTopicId=topic.id; $('cardsTitle').textContent=topic.subject;
+    renderCards(); show('cardsScreen');
+  }catch(e){ $('homeErr').textContent='Не получилось разобрать конспект. Попробуй ещё раз или вставь текст.'; $('homeErr').classList.remove('hide'); }
+  finally{ $('homeThinking').classList.add('hide'); $('parseBtn').disabled=false; }
 };
 
 function renderCards(){
-  $('cardsList').innerHTML = cards.map((c,i)=>`
-    <div class="flash">
-      <span class="flash-label">Вопрос ${i+1}</span>
-      <textarea data-i="${i}" data-f="q" rows="1">${c.q}</textarea>
-      <span class="flash-label">Ответ</span>
-      <textarea data-i="${i}" data-f="a" rows="1">${c.a}</textarea>
-    </div>`).join('');
+  $('cardsList').innerHTML = cards.map((c,i)=>`<div class="flash"><span class="flash-label">Вопрос ${i+1}</span><textarea data-i="${i}" data-f="q" rows="1">${c.q}</textarea><span class="flash-label">Ответ</span><textarea data-i="${i}" data-f="a" rows="1">${c.a}</textarea></div>`).join('');
   $('cardsList').querySelectorAll('textarea').forEach(t=>{
-    t.oninput = () => {
-      cards[t.dataset.i][t.dataset.f] = t.value;
-      if(currentTopicId){ const ts=getTopics(); const tp=ts.find(x=>x.id===currentTopicId); if(tp){ tp.cards=cards; saveTopics(ts); } }
-    };
+    t.oninput = () => { cards[t.dataset.i][t.dataset.f]=t.value; if(currentTopicId){ const ts=getTopics(); const tp=ts.find(x=>x.id===currentTopicId); if(tp){ tp.cards=cards; saveTopics(ts); } } };
   });
 }
-
 function shuffle(a){ return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]); }
 let quizIdx=0, quizScore=0, quizOrder=[];
-$('playQuizBtn').onclick = () => { quizIdx=0; quizScore=0; quizOrder = shuffle(cards.map((_,i)=>i)); show('quizScreen'); renderQuiz(); };
+const LETTERS=['A','B','C','D'];
+$('playQuizBtn').onclick = () => { quizIdx=0; quizScore=0; quizOrder=shuffle(cards.map((_,i)=>i)); show('quizScreen'); renderQuiz(); };
 function renderQuiz(){
   if(quizIdx>=quizOrder.length){
-    if(currentTopicId){
-      const ts=getTopics(); const tp=ts.find(x=>x.id===currentTopicId);
-      if(tp){ tp.learned = Math.max(tp.learned||0, quizScore); tp.total = cards.length; saveTopics(ts); }
-    }
-    $('quizBody').innerHTML = `<div class="score">${quizScore}/${quizOrder.length}</div><p>Карточек пройдено.</p>
-      <div class="row"><button class="btn" onclick="renderMenu();show('menu')">К темам</button></div>`;
+    if(currentTopicId){ const ts=getTopics(); const tp=ts.find(x=>x.id===currentTopicId); if(tp){ tp.learned=Math.max(tp.learned||0,quizScore); tp.total=cards.length; saveTopics(ts); } }
+    $('quizBody').innerHTML = `<div class="score">${quizScore}/${quizOrder.length}</div><p>Карточек пройдено.</p><div class="row"><button class="btn mint" onclick="show('menu')">К темам</button></div>`;
     return;
   }
   const c = cards[quizOrder[quizIdx]];
   const wrongPool = cards.filter((_,i)=>i!==quizOrder[quizIdx]).map(x=>x.a);
   const opts = shuffle([c.a, ...shuffle(wrongPool).slice(0,3)]);
   $('quizTitle').textContent = `Вопрос ${quizIdx+1} из ${quizOrder.length}`;
-  $('quizBody').innerHTML = `<p style="color:var(--fg);font-size:16px;font-weight:600">${c.q}</p>` +
-    opts.map(o=>`<button class="qopt" data-a="${o===c.a}">${o}</button>`).join('');
+  $('quizBody').innerHTML = `<p style="color:var(--fg);font-size:16px;font-weight:700">${c.q}</p>` +
+    opts.map((o,i)=>`<button class="qopt" data-a="${o===c.a}"><span class="lt">${LETTERS[i]}</span>${o}</button>`).join('');
   $('quizBody').querySelectorAll('.qopt').forEach(b=>{
     b.onclick = () => {
       const ok = b.dataset.a==='true';
-      if(ok){ b.classList.add('ok'); quizScore++; } else { b.classList.add('bad'); }
+      if(ok){ b.classList.add('ok'); quizScore++; } else b.classList.add('bad');
       $('quizBody').querySelectorAll('.qopt').forEach(x=>x.onclick=null);
       setTimeout(()=>{ quizIdx++; renderQuiz(); }, 700);
     };
   });
 }
-
 let matchSel=null, matchLeft=[], matchRight=[], matchedCount=0;
 $('playMatchBtn').onclick = () => {
   const set = shuffle(cards).slice(0, Math.min(6, cards.length));
   matchLeft = set.map((c,i)=>({id:i,text:c.q}));
   matchRight = shuffle(set.map((c,i)=>({id:i,text:c.a})));
-  matchedCount=0; matchSel=null;
-  show('matchScreen'); renderMatch();
+  matchedCount=0; matchSel=null; show('matchScreen'); renderMatch();
 };
 function renderMatch(){
   const col = els => els.map(e=>`<div class="match-item" data-id="${e.id}">${e.text}</div>`).join('');
-  $('matchGrid').innerHTML = col(matchLeft) + col(matchRight);
+  $('matchGrid').innerHTML = col(matchLeft)+col(matchRight);
   $('matchGrid').querySelectorAll('.match-item').forEach((el,idx)=>{
-    const side = idx < matchLeft.length ? 'L' : 'R';
+    const side = idx < matchLeft.length ? 'L':'R';
     el.onclick = () => {
       if(el.classList.contains('ok')) return;
-      if(!matchSel){ matchSel = {el, side, id:el.dataset.id}; el.classList.add('sel'); return; }
+      if(!matchSel){ matchSel={el,side,id:el.dataset.id}; el.classList.add('sel'); return; }
       if(matchSel.side===side){ matchSel.el.classList.remove('sel'); matchSel={el,side,id:el.dataset.id}; el.classList.add('sel'); return; }
       if(matchSel.id===el.dataset.id){
-        matchSel.el.classList.remove('sel'); matchSel.el.classList.add('ok'); el.classList.add('ok'); matchedCount++;
-        matchSel=null;
-        if(matchedCount===matchLeft.length){ setTimeout(()=>{renderMenu();show('menu');},600); }
+        matchSel.el.classList.remove('sel'); matchSel.el.classList.add('ok'); el.classList.add('ok'); matchedCount++; matchSel=null;
+        if(matchedCount===matchLeft.length) setTimeout(()=>show('menu'),600);
       } else {
         el.classList.add('bad'); matchSel.el.classList.add('bad');
-        setTimeout(()=>{ el.classList.remove('bad'); matchSel.el.classList.remove('bad','sel'); matchSel=null; }, 400);
+        setTimeout(()=>{ el.classList.remove('bad'); matchSel.el.classList.remove('bad','sel'); matchSel=null; },400);
       }
     };
   });
