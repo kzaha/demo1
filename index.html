@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Конспект в игру</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#1F3A34; --paper:#F4EFE3; --chalk:#F5F0E6; --board:#213C36; --board-2:#2B4A42;
-  --marker:#E8B93F; --coral:#D1495B; --line:rgba(245,240,230,0.14);
+  --marker:#E8B93F; --coral:#D1495B; --ok:#5C9E7C; --line:rgba(245,240,230,0.14);
   --bg:var(--board); --fg:var(--chalk); --card:var(--board-2); --muted:#B9C7C2;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
   box-sizing:border-box;
@@ -20,44 +21,54 @@
 :root[data-theme="light"]{ --bg:var(--paper); --fg:var(--ink); --card:#fff; --muted:#5B6F68; --line:rgba(31,58,52,0.14); }
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%}
-body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:'Space Grotesk',sans-serif;transition:background .3s}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:'Montserrat',sans-serif;font-weight:500;transition:background .3s}
 .wrap{max-width:640px;margin:0 auto;padding:28px 20px 60px}
-h1,h2{font-family:'Fraunces',serif;font-weight:600;margin:0 0 6px;line-height:1.15}
-h1{font-size:28px}
-p{color:var(--muted);line-height:1.5;margin:0 0 18px;max-width:60ch}
-header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.pill{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
+h1,h2{font-family:'Montserrat',sans-serif;font-weight:800;margin:0 0 6px;line-height:1.15;letter-spacing:-.01em}
+h1{font-size:26px}
+p{color:var(--muted);line-height:1.5;margin:0 0 18px;max-width:60ch;font-weight:500}
+strong{font-weight:800}
+header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:10px}
+.pill{font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.streak{color:var(--marker);border-color:var(--marker)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:16px}
-.btn{font-family:inherit;font-size:15px;font-weight:600;padding:13px 20px;border-radius:12px;border:none;cursor:pointer;background:var(--marker);color:#2A2205;transition:transform .15s}
+.btn{font-family:inherit;font-weight:700;font-size:15px;padding:13px 20px;border-radius:12px;border:none;cursor:pointer;background:var(--marker);color:#2A2205;transition:transform .15s}
 .btn:active{transform:scale(.97)}
 .btn.secondary{background:transparent;border:1.5px solid var(--line);color:var(--fg)}
-.btn.ghost{background:transparent;color:var(--muted);text-decoration:underline;padding:6px}
+.btn.ghost{background:transparent;color:var(--muted);text-decoration:underline;padding:6px;font-weight:600}
 .btn:disabled{opacity:.5;cursor:default}
-input[type=email],textarea{width:100%;font-family:inherit;font-size:15px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+input[type=email],textarea{width:100%;font-family:inherit;font-weight:500;font-size:15px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
 textarea{resize:vertical;min-height:70px}
 .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.dropzone{border:2px dashed var(--line);border-radius:16px;padding:36px 20px;text-align:center;cursor:pointer}
+.dropzone{border:2px dashed var(--line);border-radius:16px;padding:36px 20px;text-align:center;cursor:pointer;font-weight:600}
 .dropzone:hover{border-color:var(--marker)}
 .dropzone img{max-width:100%;max-height:180px;border-radius:10px;margin-bottom:10px}
-.thinking{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px}
+.thinking{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;font-weight:600}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--marker);animation:pulse 1s infinite ease-in-out}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 .flash{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
 .flash textarea{margin-bottom:6px;font-size:14px}
-.flash-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px;display:block}
+.flash-label{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--muted);margin-bottom:4px;display:block}
 .small{font-size:13px}
-.err{color:var(--coral);font-size:14px;margin-top:8px}
+.err{color:var(--coral);font-size:14px;font-weight:600;margin-top:8px}
 .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.match-item{padding:14px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;font-size:14px;text-align:center;transition:.15s}
+.match-item{padding:14px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;text-align:center;transition:.15s}
 .match-item.sel{border-color:var(--marker)}
-.match-item.ok{border-color:#5C9E7C;color:#5C9E7C;opacity:.4;pointer-events:none}
+.match-item.ok{border-color:var(--ok);color:var(--ok);opacity:.4;pointer-events:none}
 .match-item.bad{animation:shake .3s}
 @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.qopt{display:block;width:100%;text-align:left;padding:12px 14px;margin-bottom:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font-family:inherit;font-size:14px;cursor:pointer}
-.qopt.ok{border-color:#5C9E7C;background:rgba(92,158,124,.15)}
+.qopt{display:block;width:100%;text-align:left;padding:12px 14px;margin-bottom:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.qopt.ok{border-color:var(--ok);background:rgba(92,158,124,.15)}
 .qopt.bad{border-color:var(--coral);background:rgba(209,73,91,.12)}
-.score{font-family:'Fraunces',serif;font-size:44px;margin:6px 0}
+.score{font-family:'Montserrat',sans-serif;font-weight:800;font-size:44px;margin:6px 0}
 .hide{display:none}
+.topic{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:1px solid var(--line);margin-bottom:10px;cursor:pointer}
+.topic:hover{border-color:var(--marker)}
+.topic .tinfo{flex:1;min-width:0}
+.topic .tname{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topic .tmeta{font-size:12px;color:var(--muted);font-weight:600}
+.bar{height:5px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}
+.bar > div{height:100%;background:var(--marker)}
+.empty{color:var(--muted);font-size:14px;font-weight:600;padding:10px 0}
 </style>
 </head>
 <body>
@@ -67,7 +78,6 @@ textarea{resize:vertical;min-height:70px}
     <span class="pill" id="statusPill">гость</span>
   </header>
 
-  <!-- GATE -->
   <div id="gate" class="card">
     <h2>Вход</h2>
     <p>Введи почту. Если она в домене школы — доступ бесплатный. Если нет — можно оформить демо-подписку.</p>
@@ -76,7 +86,6 @@ textarea{resize:vertical;min-height:70px}
     <div id="gateMsg" class="small" style="margin-top:10px"></div>
   </div>
 
-  <!-- PAYWALL -->
   <div id="paywall" class="card hide">
     <h2>Подписка</h2>
     <p>Эта почта не из школьного домена. Оформи подписку, чтобы пользоваться игрой (это демо-имитация оплаты для защиты проекта).</p>
@@ -86,13 +95,20 @@ textarea{resize:vertical;min-height:70px}
     </div>
   </div>
 
-  <!-- HOME / UPLOAD -->
+  <div id="menu" class="card hide">
+    <h2>Твои темы</h2>
+    <p>Каждый загруженный конспект сохраняется как отдельная тема — можно повторять её снова в любой момент.</p>
+    <div id="topicsList"></div>
+    <div class="row">
+      <button class="btn" id="newTopicBtn">+ Новый конспект</button>
+      <button class="btn secondary hide" id="marathonBtn">Марафон по всем темам</button>
+    </div>
+  </div>
+
   <div id="home" class="card hide">
     <h2>Загрузи конспект</h2>
     <p>Сфотографируй страницу рукописного конспекта — по любому предмету. Мы превратим её в карточки для повторения.</p>
-    <div class="dropzone" id="dropzone">
-      <div id="dropzoneInner">📸 Нажми, чтобы выбрать фото</div>
-    </div>
+    <div class="dropzone" id="dropzone"><div id="dropzoneInner">📸 Нажми, чтобы выбрать фото</div></div>
     <input type="file" id="fileInput" accept="image/*" capture="environment" style="display:none">
     <div class="row">
       <button class="btn" id="parseBtn" disabled>Разобрать конспект</button>
@@ -101,43 +117,54 @@ textarea{resize:vertical;min-height:70px}
     <textarea id="pasteArea" class="hide" placeholder="Вставь сюда текст конспекта" style="margin-top:12px"></textarea>
     <div id="homeThinking" class="thinking hide" style="margin-top:14px"><span class="dot"></span> Читаю почерк и собираю карточки…</div>
     <div id="homeErr" class="err hide"></div>
+    <div class="row"><button class="btn ghost" id="homeBack">← К темам</button></div>
   </div>
 
-  <!-- CARDS REVIEW -->
   <div id="cardsScreen" class="card hide">
-    <h2>Проверь карточки</h2>
+    <h2 id="cardsTitle">Проверь карточки</h2>
     <p>Модель может ошибиться в почерке — поправь текст перед игрой.</p>
     <div id="cardsList"></div>
     <div class="row">
       <button class="btn" id="playQuizBtn">Играть · Тест</button>
       <button class="btn secondary" id="playMatchBtn">Играть · Пары</button>
-      <button class="btn ghost" id="newUploadBtn">Загрузить другой конспект</button>
+      <button class="btn ghost" id="cardsBack">← К темам</button>
     </div>
   </div>
 
-  <!-- QUIZ -->
   <div id="quizScreen" class="card hide">
     <h2 id="quizTitle">Тест</h2>
     <div id="quizBody"></div>
   </div>
 
-  <!-- MATCH -->
   <div id="matchScreen" class="card hide">
     <h2>Собери пары</h2>
     <p class="small">Нажми вопрос, потом подходящий ответ.</p>
     <div class="match-grid" id="matchGrid"></div>
-    <div class="row"><button class="btn secondary" id="matchDone" class="hide">Готово</button></div>
   </div>
-
 </div>
 
 <script>
 const $ = id => document.getElementById(id);
 let cards = [];
-let sample = null;
+let currentTopicId = null;
 let imgFile = null;
 
-function show(id){ ['gate','paywall','home','cardsScreen','quizScreen','matchScreen'].forEach(s=>$(s).classList.toggle('hide', s!==id)); }
+function show(id){ ['gate','paywall','menu','home','cardsScreen','quizScreen','matchScreen'].forEach(s=>$(s).classList.toggle('hide', s!==id)); }
+
+// ---- storage ----
+function getTopics(){ try{ return JSON.parse(localStorage.getItem('topics')||'[]'); }catch(e){ return []; } }
+function saveTopics(t){ try{ localStorage.setItem('topics', JSON.stringify(t)); }catch(e){} }
+function bumpStreak(){
+  try{
+    const today = new Date().toISOString().slice(0,10);
+    const s = JSON.parse(localStorage.getItem('streak')||'{}');
+    if(s.lastDate === today) return s.count||1;
+    const y = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    const count = s.lastDate === y ? (s.count||0)+1 : 1;
+    localStorage.setItem('streak', JSON.stringify({lastDate:today, count}));
+    return count;
+  }catch(e){ return 1; }
+}
 
 // ---- auth gate ----
 function isSchoolEmail(email){
@@ -147,21 +174,68 @@ function isSchoolEmail(email){
 $('checkEmailBtn').onclick = () => {
   const email = $('emailInput').value.trim();
   if(!email.includes('@')){ $('gateMsg').textContent = 'Введи корректную почту.'; return; }
-  if(isSchoolEmail(email)){
-    $('statusPill').textContent = 'бесплатно · школа';
-    show('home'); initSample();
-  } else {
-    show('paywall');
-  }
+  if(isSchoolEmail(email)){ $('statusPill').textContent = 'бесплатно · школа'; enterApp(); }
+  else { show('paywall'); }
 };
 $('backToGate').onclick = () => show('gate');
-$('payBtn').onclick = () => { $('statusPill').textContent = 'подписка (демо)'; show('home'); initSample(); };
+$('payBtn').onclick = () => { $('statusPill').textContent = 'подписка (демо)'; enterApp(); };
+
+function enterApp(){
+  const streak = bumpStreak();
+  const pill = document.createElement('span');
+  pill.className='pill streak'; pill.textContent = `🔥 ${streak} ${streak===1?'день':'дня подряд'}`;
+  $('gate').closest('.wrap').querySelector('header.top').appendChild(pill);
+  renderMenu();
+  show('menu');
+}
+
+// ---- menu ----
+function renderMenu(){
+  const topics = getTopics();
+  if(!topics.length){ $('topicsList').innerHTML = '<div class="empty">Пока нет ни одной темы — загрузи первый конспект.</div>'; }
+  else {
+    $('topicsList').innerHTML = topics.map(t=>{
+      const pct = t.total ? Math.round((t.learned||0)/t.total*100) : 0;
+      return `<div class="topic" data-id="${t.id}">
+        <div class="tinfo">
+          <div class="tname">${t.subject||'Без названия'}</div>
+          <div class="tmeta">${t.cards.length} карточек${t.total?` · ${pct}% выучено`:''}</div>
+          <div class="bar"><div style="width:${pct}%"></div></div>
+        </div>
+      </div>`;
+    }).join('');
+    $('topicsList').querySelectorAll('.topic').forEach(el=>{
+      el.onclick = () => openTopic(el.dataset.id);
+    });
+  }
+  $('marathonBtn').classList.toggle('hide', topics.length < 2);
+}
+$('newTopicBtn').onclick = () => { resetHome(); show('home'); };
+$('homeBack').onclick = () => show('menu');
+$('cardsBack').onclick = () => show('menu');
+$('marathonBtn').onclick = () => {
+  const topics = getTopics();
+  cards = topics.flatMap(t=>t.cards).slice(0,60);
+  currentTopicId = null;
+  $('cardsTitle').textContent = 'Марафон · все темы';
+  renderCards();
+  show('cardsScreen');
+};
+function openTopic(id){
+  const t = getTopics().find(x=>x.id===id);
+  if(!t) return;
+  cards = t.cards; currentTopicId = id;
+  $('cardsTitle').textContent = t.subject || 'Тема';
+  renderCards();
+  show('cardsScreen');
+}
+function resetHome(){
+  imgFile=null; $('dropzoneInner').textContent='📸 Нажми, чтобы выбрать фото';
+  $('parseBtn').disabled=true; $('pasteArea').value=''; $('pasteArea').classList.add('hide');
+  $('homeErr').classList.add('hide');
+}
 
 // ---- backend call ----
-// На настоящем сайте (не в claude.ai) AI вызывается через наш собственный сервер /api/parse,
-// который безопасно хранит ключ Anthropic и не показывает его в браузере.
-function initSample(){ /* ничего готовить не нужно — сервер уже настроен на Vercel */ }
-
 function fileToBase64(file){
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -170,23 +244,14 @@ function fileToBase64(file){
     reader.readAsDataURL(file);
   });
 }
-
 async function askServer(prompt, imageFile){
   const body = { prompt };
-  if(imageFile){
-    body.imageBase64 = await fileToBase64(imageFile);
-    body.imageType = imageFile.type || 'image/jpeg';
-  }
-  const res = await fetch('/api/parse', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify(body)
-  });
+  if(imageFile){ body.imageBase64 = await fileToBase64(imageFile); body.imageType = imageFile.type || 'image/jpeg'; }
+  const res = await fetch('/api/parse', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
   const data = await res.json();
-  if(!res.ok) throw new Error((data.error && (data.error.error?.message || data.error)) || 'Ошибка сервера');
+  if(!res.ok) throw new Error('server error');
   return data.text;
 }
-
 function extractJson(text){
   const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
   const raw = fence ? fence[1] : text;
@@ -199,10 +264,8 @@ function extractJson(text){
 // ---- upload ----
 $('dropzone').onclick = () => $('fileInput').click();
 $('fileInput').onchange = e => {
-  imgFile = e.target.files[0];
-  if(!imgFile) return;
-  const url = URL.createObjectURL(imgFile);
-  $('dropzoneInner').innerHTML = `<img src="${url}">`;
+  imgFile = e.target.files[0]; if(!imgFile) return;
+  $('dropzoneInner').innerHTML = `<img src="${URL.createObjectURL(imgFile)}">`;
   $('parseBtn').disabled = false;
 };
 $('pasteInstead').onclick = () => {
@@ -210,30 +273,29 @@ $('pasteInstead').onclick = () => {
   if(!$('pasteArea').classList.contains('hide')) $('parseBtn').disabled = false;
 };
 
-const CARD_PROMPT = `Ты помогаешь школьнику превратить конспект в карточки для повторения. По тексту/фото конспекта (предмет любой — не уточняй его) выдели ключевые факты и составь от 6 до 12 карточек вопрос-ответ, коротких и конкретных. Если что-то неразборчиво — пропусти. Ответь ТОЛЬКО JSON-массивом объектов вида {"q":"...","a":"..."}, без пояснений и без markdown-разметки.`;
+const CARD_PROMPT = `Ты помогаешь школьнику превратить конспект в карточки для повторения. По тексту/фото конспекта (предмет любой) пройдись по ВСЕМУ конспекту от начала до конца и составь карточки вопрос-ответ по каждому факту, термину, определению, дате или формуле — сколько бы их ни было, не ограничивай себя маленьким числом. Каждая карточка короткая и конкретная. Если слово неразборчиво — пропусти только его. Ещё определи одним-двумя словами предмет/тему конспекта. Ответь ТОЛЬКО JSON-объектом вида {"subject":"...", "cards":[{"q":"...","a":"..."}]}, без пояснений и без markdown-разметки.`;
 
 $('parseBtn').onclick = async () => {
-  $('homeThinking').classList.remove('hide');
-  $('homeErr').classList.add('hide');
-  $('parseBtn').disabled = true;
+  $('homeThinking').classList.remove('hide'); $('homeErr').classList.add('hide'); $('parseBtn').disabled = true;
   try{
     let prompt = CARD_PROMPT;
     const useImage = imgFile && $('pasteArea').classList.contains('hide');
-    if(!useImage){
-      prompt += `\n\nТекст конспекта:\n${$('pasteArea').value}`;
-    }
+    if(!useImage) prompt += `\n\nТекст конспекта:\n${$('pasteArea').value}`;
     const text = await askServer(prompt, useImage ? imgFile : null);
     const data = extractJson(text);
-    cards = Array.isArray(data) ? data.filter(c=>c && c.q && c.a).slice(0,12) : [];
-    if(!cards.length) throw new Error('empty');
+    const list = Array.isArray(data.cards) ? data.cards.filter(c=>c&&c.q&&c.a).slice(0,40) : [];
+    if(!list.length) throw new Error('empty');
+    const topic = { id: 't'+Date.now(), subject: data.subject || 'Без названия', cards: list, total: list.length, learned: 0 };
+    const topics = getTopics(); topics.unshift(topic); saveTopics(topics);
+    cards = list; currentTopicId = topic.id;
+    $('cardsTitle').textContent = topic.subject;
     renderCards();
     show('cardsScreen');
   }catch(e){
     $('homeErr').textContent = 'Не получилось разобрать конспект. Попробуй ещё раз или вставь текст.';
     $('homeErr').classList.remove('hide');
   } finally {
-    $('homeThinking').classList.add('hide');
-    $('parseBtn').disabled = false;
+    $('homeThinking').classList.add('hide'); $('parseBtn').disabled = false;
   }
 };
 
@@ -246,29 +308,31 @@ function renderCards(){
       <textarea data-i="${i}" data-f="a" rows="1">${c.a}</textarea>
     </div>`).join('');
   $('cardsList').querySelectorAll('textarea').forEach(t=>{
-    t.oninput = () => { cards[t.dataset.i][t.dataset.f] = t.value; };
+    t.oninput = () => {
+      cards[t.dataset.i][t.dataset.f] = t.value;
+      if(currentTopicId){ const ts=getTopics(); const tp=ts.find(x=>x.id===currentTopicId); if(tp){ tp.cards=cards; saveTopics(ts); } }
+    };
   });
 }
-$('newUploadBtn').onclick = () => { imgFile=null; $('dropzoneInner').textContent='📸 Нажми, чтобы выбрать фото'; $('parseBtn').disabled=true; $('pasteArea').value=''; show('home'); };
 
-// ---- quiz mode ----
 function shuffle(a){ return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]); }
 let quizIdx=0, quizScore=0, quizOrder=[];
-$('playQuizBtn').onclick = () => {
-  quizIdx=0; quizScore=0; quizOrder = shuffle(cards.map((_,i)=>i));
-  show('quizScreen'); renderQuiz();
-};
+$('playQuizBtn').onclick = () => { quizIdx=0; quizScore=0; quizOrder = shuffle(cards.map((_,i)=>i)); show('quizScreen'); renderQuiz(); };
 function renderQuiz(){
   if(quizIdx>=quizOrder.length){
+    if(currentTopicId){
+      const ts=getTopics(); const tp=ts.find(x=>x.id===currentTopicId);
+      if(tp){ tp.learned = Math.max(tp.learned||0, quizScore); tp.total = cards.length; saveTopics(ts); }
+    }
     $('quizBody').innerHTML = `<div class="score">${quizScore}/${quizOrder.length}</div><p>Карточек пройдено.</p>
-      <div class="row"><button class="btn" onclick="show('cardsScreen')">К карточкам</button></div>`;
+      <div class="row"><button class="btn" onclick="renderMenu();show('menu')">К темам</button></div>`;
     return;
   }
   const c = cards[quizOrder[quizIdx]];
   const wrongPool = cards.filter((_,i)=>i!==quizOrder[quizIdx]).map(x=>x.a);
   const opts = shuffle([c.a, ...shuffle(wrongPool).slice(0,3)]);
   $('quizTitle').textContent = `Вопрос ${quizIdx+1} из ${quizOrder.length}`;
-  $('quizBody').innerHTML = `<p style="color:var(--fg);font-size:16px">${c.q}</p>` +
+  $('quizBody').innerHTML = `<p style="color:var(--fg);font-size:16px;font-weight:600">${c.q}</p>` +
     opts.map(o=>`<button class="qopt" data-a="${o===c.a}">${o}</button>`).join('');
   $('quizBody').querySelectorAll('.qopt').forEach(b=>{
     b.onclick = () => {
@@ -280,7 +344,6 @@ function renderQuiz(){
   });
 }
 
-// ---- match mode ----
 let matchSel=null, matchLeft=[], matchRight=[], matchedCount=0;
 $('playMatchBtn').onclick = () => {
   const set = shuffle(cards).slice(0, Math.min(6, cards.length));
@@ -299,10 +362,9 @@ function renderMatch(){
       if(!matchSel){ matchSel = {el, side, id:el.dataset.id}; el.classList.add('sel'); return; }
       if(matchSel.side===side){ matchSel.el.classList.remove('sel'); matchSel={el,side,id:el.dataset.id}; el.classList.add('sel'); return; }
       if(matchSel.id===el.dataset.id){
-        matchSel.el.classList.remove('sel'); matchSel.el.classList.add('ok');
-        el.classList.add('ok'); matchedCount++;
+        matchSel.el.classList.remove('sel'); matchSel.el.classList.add('ok'); el.classList.add('ok'); matchedCount++;
         matchSel=null;
-        if(matchedCount===matchLeft.length){ setTimeout(()=>show('cardsScreen'),600); }
+        if(matchedCount===matchLeft.length){ setTimeout(()=>{renderMenu();show('menu');},600); }
       } else {
         el.classList.add('bad'); matchSel.el.classList.add('bad');
         setTimeout(()=>{ el.classList.remove('bad'); matchSel.el.classList.remove('bad','sel'); matchSel=null; }, 400);
